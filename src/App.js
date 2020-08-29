@@ -1,8 +1,11 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+// import base from './base';
 
 function App() {
+
+  // firebase hookup needed. ComponentDidMount. OR Effect Hook.
   return (
     <div className="App">
       <header className="App-header">
