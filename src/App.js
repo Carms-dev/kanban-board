@@ -4,8 +4,8 @@ import './App.css';
 // import base from './base';
 
 function App() {
-
-  // firebase hookup needed. ComponentDidMount. OR Effect Hook.
+  // firebase hookup needed to syncState. ComponentDidMount. OR Effect Hook.
+  
   return (
     <div className="App">
       <header className="App-header">

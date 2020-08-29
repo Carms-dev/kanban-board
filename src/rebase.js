@@ -1,8 +1,8 @@
 import Rebase from 're-base';
 import firebase from 'firebase';
 
-const firebaseApp = firebase.initializeApp({
-    apiKey: "AIzaSyBQwIpSTpbImpfhdk2I1tNBdeTEg-iEDew",
+const firebaseAAIzaSyBQwIpSTpbImpfhdk2I1tNBdeTEg-iEDewpp = firebase.initializeApp({
+    apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
     authDomain: "mintbean-kanban.firebaseapp.com",
     databaseURL: "https://mintbean-kanban.firebaseio.com",
     // projectId: "mintbean-kanban",
