@@ -10,6 +10,7 @@ class App extends React.Component {
     columns: {}
   }
 
+  // initialize basic columns
   componentWillMount() {
     this.initColumns();
   }
