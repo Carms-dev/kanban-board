@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 
+
 class Task extends Component {
     render() {
         const { task, toggleIsEdit } = this.props;

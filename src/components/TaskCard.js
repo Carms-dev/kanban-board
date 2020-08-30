@@ -11,11 +11,28 @@ class TaskCard extends Component {
 
     render() {
         const { columns, selectTask, selectedTask, columnKey, taskIndex, updateColumn } = this.props;
-        const task = columns[columnKey].tasks[taskIndex]
+        const task = columns[columnKey].tasks[taskIndex];
+        const dragStart = e => {
+          const target = e.target;
+          console.log(target);
+          e.dataTransfer('task-card', target.id);
+          setTimeout(() => {
+            target.display = 'none';
+          }, 0)
+        }
+        const dragOver = e => {
+          e.stopPropagation();
+        }
 
         return (
             <div>
-                <div className="task">
+                <div
+                className="task"
+                id={taskIndex}
+                draggable={this.props.draggable}
+                onDragStart={dragStart}
+                onDragOver={dragOver}
+                >
                     <h3>
                         {task.title}
                     </h3>

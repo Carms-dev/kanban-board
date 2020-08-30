@@ -6,8 +6,22 @@ import AddTaskForm from './AddTaskForm';
 export class Column extends Component {
     render() {
         const { columns, columnKey, updateColumn, deleteColumn, selectColumn, selectedColumn, selectTask, selectedTask } = this.props;
+        const drop = e => {
+          e.preventDefault();
+          const task = e.dataTransfer.getData('task-card');
+          const card = document.getElementById(task);
+          card.style.display = 'block';
+          e.target.appendChild(card);
+        };
+        const dragOver = e => {
+          e.preventDefault();
+        };
         return (
-            <div>
+            <div
+              id={this.id}
+              onDrop={drop}
+              onDragOver={dragOver}
+            >
                 <div className="column-header">
                     <h2>{columns[columnKey].name}</h2>
                     {selectedColumn === columns[columnKey] ? (
@@ -50,6 +64,7 @@ export class Column extends Component {
                             updateColumn={updateColumn}
                             selectTask={selectTask}
                             selectedTask={selectedTask}
+                            draggable="true"
                         />
                     );
                 })}
