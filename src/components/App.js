@@ -18,9 +18,9 @@ class App extends React.Component {
     const colName = ["Todo", "In progress", "Done"];
     const columns = {}
     colName.forEach((v, i) => {
-      columns[`column${i}`] = { name: v, tasks: {} };
+      columns[`column${i}`] = { name: v, tasks: [{ name: "xx", description: "xx des" }, { name: "yy", description: "yy des" }] };
     })
-    
+
     this.setState({ columns });
   }
 
@@ -32,7 +32,7 @@ class App extends React.Component {
     return (
       <div className="columns">
         {Object.keys(this.state.columns).map(key => (
-          <Column 
+          <Column
             key={key}
             column={this.state.columns[key]}
           />
