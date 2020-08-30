@@ -5,6 +5,9 @@ export class Column extends Component {
         return (
             <div>
                 {this.props.column.name}
+                <button onClick={() => { this.props.deleteColumn(this.props.index) }}>
+                    🗑️
+                </button>
             </div>
         )
     }
