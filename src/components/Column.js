@@ -10,9 +10,10 @@ export class Column extends Component {
         <div>
             <h2>{this.props.column.name}</h2>
             <div>
-              {this.props.column.tasks.map((task, index) => {
-                return <Task key={index} task={task} />
-              })}
+                {this.props.column.name}
+                <button onClick={() => { this.props.deleteColumn(this.props.index) }}>
+                    🗑️
+                </button>
             </div>
         </div>
       )
