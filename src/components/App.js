@@ -1,31 +1,69 @@
 import React from 'react';
-// import logo from './logo.svg';
-// import './App.css';
 import Column from './Column';
+import AddColumnForm from './AddColumnForm';
 // import base from './base';
 
 class App extends React.Component {
-  // firebase hookup needed to syncState. ComponentDidMount. OR Effect Hook.
   state = {
-    columns: {}
+    columns: {},
+    isAddCol: false
   }
 
-  componentWillMount() {
-    this.initColumns();
+  // initialize basic columns
+  componentDidMount() {
+    // initialize new board
+    if (Object.keys(this.state.columns).length === 0) {
+      this.initColumns();
+    }
+    
+    // retrive data from localStorage
+    const localStorageRef = localStorage.getItem("kanban");
+    if (localStorageRef) {
+      this.setState({ columns: JSON.parse(localStorageRef) });
+    }
   }
 
+  componentDidUpdate() {
+    // store data when there are updates
+    localStorage.setItem(
+      "kanban",
+      JSON.stringify(this.state.columns)
+    )
+  }
+  
+  // initialize board
   initColumns = () => {
     const colName = ["Todo", "In progress", "Done"];
     const columns = {}
     colName.forEach((v, i) => {
-      columns[`column${i}`] = { name: v, tasks: {} };
+      columns[`column${i}`] = { name: v, tasks: [{ title: "xx" }] };
     })
-    
+
     this.setState({ columns });
   }
 
-  initAddColumnForm = () => {
-    console.log("add column");
+  // Column CRUD
+  addColumn = (column) => {
+    const columns = { ...this.state.columns };
+    columns[`column${Date.now()}`] = column;
+    this.setState({ columns });
+  }
+
+  updateColumn = (key, updatedColumn) => {
+    const columns = { ...this.state.columns };
+    columns[key] = updatedColumn;
+    this.setState({ columns });
+  }
+
+  deleteColumn = (key) => {
+    const columns = { ...this.state.columns };
+    delete columns[key];
+    this.setState({ columns });
+  }
+  
+  // update the isAddCol flag
+  toggleAddCol = () => {
+    this.setState({ isAddCol: !this.state.isAddCol });
   }
 
   render() {
@@ -34,10 +72,19 @@ class App extends React.Component {
         {Object.keys(this.state.columns).map(key => (
           <Column 
             key={key}
+            index={key}
             column={this.state.columns[key]}
+            updateColumn={this.updateColumn}
+            deleteColumn={this.deleteColumn}
           />
         ))}
-        <button onClick={this.initAddColumnForm}>+ Add Another Column</button>
+        {(this.state.isAddCol) ? 
+          <AddColumnForm 
+            toggleAddCol={this.toggleAddCol}
+            addColumn={this.addColumn}
+          /> : 
+          <button onClick={() => this.toggleAddCol()}>+ Add Another Column</button>
+        }
       </div>
     )
   }
