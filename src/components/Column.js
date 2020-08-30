@@ -5,12 +5,12 @@ import AddTaskForm from './AddTaskForm';
 
 export class Column extends Component {
     render() {
-        const { columns, columnKey, updateColumn, deleteColumn, selectColumn, selectedColumn, selectTask, selectedTask } = this.props;
+        const { columns, columnKey, updateColumn, deleteColumn, selectColumn, selectedColumnKey, selectTask, selectedTaskKey } = this.props;
         return (
           <div>
             <div className="column-header">
               <h2>{columns[columnKey].name}</h2>
-              {selectedColumn === columnKey ? (
+              {selectedColumnKey === columnKey ? (
                 <AddTaskForm
                   columns={columns}
                   columnKey={columnKey}
@@ -49,7 +49,7 @@ export class Column extends Component {
                   taskKey={key}
                   updateColumn={updateColumn}
                   selectTask={selectTask}
-                  selectedTask={selectedTask}
+                  selectedTaskKey={selectedTaskKey}
                 />
               );
             })}

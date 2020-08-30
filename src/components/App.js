@@ -6,8 +6,8 @@ class App extends React.Component {
   state = {
     columns: {},
     isAddCol: false,
-    selectedColumn: null,
-    selectedTask: null
+    selectedColumnKey: null,
+    selectedTaskKey: null
   }
 
   // initialize basic columns
@@ -53,17 +53,17 @@ class App extends React.Component {
   selectColumn = (columnKey) => {
     const column = this.state.columns[columnKey]
     if (column) {
-      this.setState({ selectedColumn: columnKey });
+      this.setState({ selectedColumnKey: columnKey });
     } else {
-      this.setState({ selectedColumn: null });
+      this.setState({ selectedColumnKey: null });
     }
   }
 
   // selectTask
   selectTask = (columnKey, taskKey) => {
     const task = this.state.columns[columnKey].tasks[taskKey];
-    const selectedTask = task ? taskKey : null;
-    this.setState({ selectedTask })
+    const selectedTaskKey = task ? taskKey : null;
+    this.setState({ selectedTaskKey })
   }
 
   // Column CRUD
@@ -100,8 +100,8 @@ class App extends React.Component {
               key={key}
               columnKey={key}
               columns={this.state.columns}
-              selectedColumn={this.state.selectedColumn}
-              selectedTask={this.state.selectedTask}
+              selectedColumnKey={this.state.selectedColumnKey}
+              selectedTaskKey={this.state.selectedTaskKey}
               selectColumn={this.selectColumn}
               selectTask={this.selectTask}
               updateColumn={this.updateColumn}

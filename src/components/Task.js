@@ -3,7 +3,7 @@ import TaskModal from './TaskModal';
 
 class Task extends Component {
   render() {
-      const { columns, selectTask, selectedTask, columnKey, taskKey, updateColumn } = this.props;
+      const { columns, selectTask, selectedTaskKey, columnKey, taskKey, updateColumn } = this.props;
       const task = columns[columnKey].tasks[taskKey]
 
       return (
@@ -16,7 +16,7 @@ class Task extends Component {
             </button>
           </div>
             {/* render popup if that task is selected */}
-          {selectedTask === taskKey ? (
+          {selectedTaskKey === taskKey ? (
             <TaskModal
               columns={columns}
               columnKey={columnKey}
