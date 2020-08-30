@@ -4,7 +4,8 @@ export class Task extends Component {
     render() {
         return (
             <div>
-                I'm a Task
+                <h3>{this.props.task.name}</h3>
+                <p>{this.props.task.description}</p>
             </div>
         )
     }

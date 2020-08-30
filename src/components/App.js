@@ -15,7 +15,7 @@ class App extends React.Component {
     if (Object.keys(this.state.columns).length === 0) {
       this.initColumns();
     }
-    
+
     // retrive data from localStorage
     const localStorageRef = localStorage.getItem("kanban");
     if (localStorageRef) {
@@ -30,7 +30,7 @@ class App extends React.Component {
       JSON.stringify(this.state.columns)
     )
   }
-  
+
   // initialize board
   initColumns = () => {
     const colName = ["Todo", "In progress", "Done"];
@@ -60,7 +60,7 @@ class App extends React.Component {
     delete columns[key];
     this.setState({ columns });
   }
-  
+
   // update the isAddCol flag
   toggleAddCol = () => {
     this.setState({ isAddCol: !this.state.isAddCol });
@@ -70,7 +70,7 @@ class App extends React.Component {
     return (
       <div className="columns">
         {Object.keys(this.state.columns).map(key => (
-          <Column 
+          <Column
             key={key}
             index={key}
             column={this.state.columns[key]}
@@ -78,11 +78,11 @@ class App extends React.Component {
             deleteColumn={this.deleteColumn}
           />
         ))}
-        {(this.state.isAddCol) ? 
-          <AddColumnForm 
+        {(this.state.isAddCol) ?
+          <AddColumnForm
             toggleAddCol={this.toggleAddCol}
             addColumn={this.addColumn}
-          /> : 
+          /> :
           <button onClick={() => this.toggleAddCol()}>+ Add Another Column</button>
         }
       </div>
