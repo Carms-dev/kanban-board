@@ -51,9 +51,9 @@ class App extends React.Component {
 
   //selectColumn
   selectColumn = (columnKey) => {
-    if (columnKey) {
-      const selectedColumn = this.state.columns[columnKey]
-      this.setState({ selectedColumn });
+    const column = this.state.columns[columnKey]
+    if (column) {
+      this.setState({ selectedColumn: columnKey });
     } else {
       this.setState({ selectedColumn: null });
     }

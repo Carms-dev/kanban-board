@@ -10,7 +10,7 @@ export class Column extends Component {
           <div>
             <div className="column-header">
               <h2>{columns[columnKey].name}</h2>
-              {selectedColumn === columns[columnKey] ? (
+              {selectedColumn === columnKey ? (
                 <AddTaskForm
                   columns={columns}
                   columnKey={columnKey}
