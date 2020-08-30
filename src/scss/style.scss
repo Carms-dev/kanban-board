@@ -5,6 +5,9 @@
     --light-grey: #DADBE2;
     --br: 0.2rem;
 }
+* {
+    box-sizing: border-box;
+}
 
 h1,
 h2,
@@ -81,17 +84,18 @@ body {
         color: var(--dark);
         padding: 0.5rem 0;
     }
-    button {
-        background-color: var(--light-grey);
-        width: 2rem;
-        height: 2rem;
-        font-size: 1rem;
-        border-radius: var(--br);
-        display: none;
+    &:hover button {
+        display: grid;
+        place-content: center center;
     }
-    &:hover button{
-        display: inline-block;
-    }
+}
+.sq-btn {
+    background-color: var(--light-grey);
+    width: 2rem;
+    height: 2rem;
+    font-size: 1rem;
+    border-radius: var(--br);
+    display: none;
 }
 
 // btn
@@ -116,11 +120,32 @@ body {
 .task-card {
     width: 100%;
     background: #fff;
-    margin: 0.5rem 0;
+    margin-top: 0.5rem;
+
     border-radius: var(--br);
-    padding: 0.5rem 0;
+    padding: 0.5rem;
     h3 {
-        font-weight: 400;
+        padding: 0.5rem 0;
+    }
+
+    button {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    &:hover .icon-btn{
+        display: grid;
+        place-content: center center;
     }
 }
 
+.icon-btn {
+    display: none;
+    transition: 0.3s all ease;
+}
+.task-card > * {
+    font-weight: 400;
+}
+
+// form

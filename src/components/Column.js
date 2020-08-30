@@ -10,7 +10,7 @@ export class Column extends Component {
           <div className="column-card">
             <div className="column-header">
               <h2>{columns[columnKey].name}</h2>
-              <button onClick={() => deleteColumn(columnKey)}>🗑</button>
+              <button className="sq-btn" onClick={() => deleteColumn(columnKey)}>🗑</button>
             </div>
 
             {Object.keys(columns[columnKey].tasks).map((key) => {
