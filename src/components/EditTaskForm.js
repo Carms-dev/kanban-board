@@ -1,44 +1,43 @@
 import React from 'react'
 
 class EditTaskForm extends React.Component {
+    // Tasks#Update: onChange
     updateTask = (e) => {
+        // skip refresh
         e.preventDefault();
-        const { columns, columnKey, taskIndex, updateColumn } = this.props;
+        // create the updated task
+        const { columns, columnKey, taskKey, updateColumn } = this.props;
+        const task = columns[columnKey].tasks[taskKey];
 
-        const task = columns[columnKey].tasks[taskIndex];
         const updatedTask = {
             ...task,
             [e.currentTarget.name]: e.currentTarget.value
         }
+        // update the column
         const updatedColumn = columns[columnKey];
-        updatedColumn.tasks[taskIndex] = updatedTask;
-
+        updatedColumn.tasks[taskKey] = updatedTask;
         updateColumn(columnKey, updatedColumn);
-        e.preventDefault();
-
     }
 
     render() {
-        const { columns, columnKey, taskIndex, toggleIsEdit } = this.props;
-        const task = columns[columnKey].tasks[taskIndex];
+        const { columns, columnKey, taskKey } = this.props;
+        const task = columns[columnKey].tasks[taskKey];
 
         return (
-            <form className="task-add" onSubmit={this.updateTask}>
-                <button onClick={() => toggleIsEdit()}>X</button>
+            <form className="task-add">
                 <input
                     type="text"
-                    // onChange={this.updateTask}
+                    onChange={this.updateTask}
                     name="title"
                     placeholder="Enter title"
                     value={task.title}
                 />
                 <input
                     type="text" name="description"
-                    // onChange={this.updateTask}
+                    onChange={this.updateTask}
                     placeholder="Enter description"
                     value={task.description}
                 />
-                <button type="submit">Save Change</button>
             </form>
         )
     }

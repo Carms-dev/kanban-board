@@ -43,7 +43,7 @@ class App extends React.Component {
     const colName = ["Todo", "In progress", "Done"];
     const columns = {}
     colName.forEach((v, i) => {
-      columns[`column${i}`] = { name: v, tasks: [{ title: "xx" }] };
+      columns[`column${i}`] = { name: v, tasks: {} };
     })
 
     this.setState({ columns });
@@ -60,9 +60,10 @@ class App extends React.Component {
   }
 
   // selectTask
-  selectTask = (columnKey, taskIndex) => {
-    const selectedTask = this.state.columns[columnKey].tasks[taskIndex];
-    selectedTask ? this.setState({ selectedTask }) : this.setState({ selectedTask: null })
+  selectTask = (columnKey, taskKey) => {
+    const task = this.state.columns[columnKey].tasks[taskKey];
+    const selectedTask = task ? taskKey : null;
+    this.setState({ selectedTask })
   }
 
   // Column CRUD
@@ -112,7 +113,7 @@ class App extends React.Component {
             <AddColumnForm
               toggleAddCol={this.toggleAddCol}
               addColumn={this.addColumn}
-            /> : <button onClick={() => this.toggleAddCol()}>+ Add Another Column</button>
+            /> : <button onClick={this.toggleAddCol}>+ Add Another Column</button>
           }
         </div>
       </div>
