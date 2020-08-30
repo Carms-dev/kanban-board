@@ -8,7 +8,7 @@ class AddColumnForm extends React.Component {
         e.preventDefault();
         const column = {
             name: this.nameRef.current.value,
-            tasks: {}
+            tasks: []
         }
         this.props.addColumn(column);
         // form reset
@@ -21,7 +21,7 @@ class AddColumnForm extends React.Component {
         return (
             <form className="column-add" onSubmit={this.createColumn} >
                 <input required ref={this.nameRef} type="text" name="name" placeholder="Enter title..."/>
-                <button tyoe="submit">Add Column</button>
+                <button type="submit">Add Column</button>
                 <button onClick={() => this.props.toggleAddCol()}>✖️</button>
             </form>
         )

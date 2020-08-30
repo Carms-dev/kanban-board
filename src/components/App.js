@@ -4,28 +4,45 @@ import AddColumnForm from './AddColumnForm';
 // import base from './base';
 
 class App extends React.Component {
-  // firebase hookup needed to syncState. ComponentDidMount. OR Effect Hook.
   state = {
     columns: {},
     isAddCol: false
   }
 
   // initialize basic columns
-  componentWillMount() {
-    this.initColumns();
+  componentDidMount() {
+    // initialize new board
+    if (Object.keys(this.state.columns).length === 0) {
+      this.initColumns();
+    }
+    
+    // retrive data from localStorage
+    const localStorageRef = localStorage.getItem("kanban");
+    if (localStorageRef) {
+      this.setState({ columns: JSON.parse(localStorageRef) });
+    }
   }
 
+  componentDidUpdate() {
+    // store data when there are updates
+    localStorage.setItem(
+      "kanban",
+      JSON.stringify(this.state.columns)
+    )
+  }
+  
+  // initialize board
   initColumns = () => {
     const colName = ["Todo", "In progress", "Done"];
     const columns = {}
     colName.forEach((v, i) => {
-      columns[`column${i}`] = { name: v, tasks: {} };
+      columns[`column${i}`] = { name: v, tasks: [{ title: "xx" }] };
     })
-    
+
     this.setState({ columns });
   }
 
-  // Column crud
+  // Column CRUD
   addColumn = (column) => {
     const columns = { ...this.state.columns };
     columns[`column${Date.now()}`] = column;
@@ -44,6 +61,7 @@ class App extends React.Component {
     this.setState({ columns });
   }
   
+  // update the isAddCol flag
   toggleAddCol = () => {
     this.setState({ isAddCol: !this.state.isAddCol });
   }
@@ -60,12 +78,13 @@ class App extends React.Component {
             deleteColumn={this.deleteColumn}
           />
         ))}
-        {(this.state.isAddCol) ? <AddColumnForm 
-          toggleAddCol={this.toggleAddCol}
-          addColumn={this.addColumn}
-        /> : <button onClick={() => this.toggleAddCol()}>+ Add Another Column</button>
+        {(this.state.isAddCol) ? 
+          <AddColumnForm 
+            toggleAddCol={this.toggleAddCol}
+            addColumn={this.addColumn}
+          /> : 
+          <button onClick={() => this.toggleAddCol()}>+ Add Another Column</button>
         }
-
       </div>
     )
   }
