@@ -1,4 +1,5 @@
 import React from 'react';
+import Header from './Header'
 import Column from './Column';
 import AddColumnForm from './AddColumnForm';
 
@@ -93,7 +94,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <h1>Kanban Board</h1>
+        <Header />
         <div className="columns">
           {Object.keys(this.state.columns).map(key => (
             <Column
@@ -113,7 +114,7 @@ class App extends React.Component {
             <AddColumnForm
               toggleAddCol={this.toggleAddCol}
               addColumn={this.addColumn}
-            /> : <button onClick={this.toggleAddCol}>+ Add Another Column</button>
+            /> : <button className="add-btn" onClick={this.toggleAddCol}>+ Add Another Column</button>
           }
         </div>
       </div>

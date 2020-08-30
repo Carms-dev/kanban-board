@@ -1,3 +1,11 @@
+:root {
+    --dark: #172b4d;
+    --light: #ebecf0;
+    --dark-grey: #5e6c84;
+    --light-grey: #DADBE2;
+    --br: 0.2rem;
+}
+
 h1,
 h2,
 h3, 
@@ -5,20 +13,114 @@ h4,
 h5,
 h6,
 p {
+    font-size: 1rem;
     padding: 0;
     margin: 0;
+}
+button {
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+}
+button:focus {
+    outline:0;
+}
+
+body {
+    background-image: url(https://images.unsplash.com/photo-1494178270175-e96de2971df9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1272&q=80);
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+}
+
+// header
+.navbar {
+    padding: 1rem;
+    background: var(--light);
+    display: grid;
+    place-content: center center;
+    
+    h1 {
+        color: var(--dark);
+        font-size: 2rem;
+    }
 }
 
 .columns {
     display: flex;
-    flex-wrap: wrap;
+    overflow-x: scroll;
+    padding: 0.5rem;
+    scroll-snap-type: x mandatory;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
 }
 
 .columns > * {
     display: inline-block;
-    width: 240px;
-    padding: 12px;
-    margin:12px;
-    border-radius: 3px;
-    background: #ebecf0;
+    min-width: 300px;
+    height: fit-content;
+    border-radius: var(--br);
+    scroll-snap-align: center;
 }
+
+// column-card
+.column-card {
+    background: var(--light);
+    margin: 0.5rem;
+    padding: 0.5rem 1rem;
+}
+.column-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    
+    h2 {
+        color: var(--dark);
+        padding: 0.5rem 0;
+    }
+    button {
+        background-color: var(--light-grey);
+        width: 2rem;
+        height: 2rem;
+        font-size: 1rem;
+        border-radius: var(--br);
+        display: none;
+    }
+    &:hover button{
+        display: inline-block;
+    }
+}
+
+// btn
+.add-btn {
+    width: 100%;
+    max-width: 300px;
+    margin: 0.5rem 0;
+    padding: 0.75rem;
+    text-align: left;
+    background: var(--light-grey);
+    color: var(--dark);
+    border-radius: var(--br);
+    transition: all 0.3s;
+    opacity: 0.6;
+    
+    &:hover {
+        opacity: 1;
+    }
+}
+
+// task card
+.task-card {
+    width: 100%;
+    background: #fff;
+    margin: 0.5rem 0;
+    border-radius: var(--br);
+    padding: 0.5rem 0;
+    h3 {
+        font-weight: 400;
+    }
+}
+
