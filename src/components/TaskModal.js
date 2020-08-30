@@ -1,42 +1,30 @@
 import React, { Component } from 'react'
-import Task from './Task';
 import EditTaskForm from './EditTaskForm';
 
 
 class TaskModal extends Component {
-    state = {
-        isEdit: false
-    }
-
-    toggleIsEdit = () => {
-        this.setState({ isEdit: !this.state.isEdit });
-    }
-
-    deleteTask = (columnkey, taskIndex) => {
+    // Tasks#destroy: onClick
+    deleteTask = (taskKey) => {
         const column = this.props.columns[this.props.columnKey];
-        column.tasks.splice(taskIndex, 1);
+        delete column.tasks[taskKey]
         this.props.updateColumn(this.props.columnKey, column);
     }
 
     render() {
-        const { columns, selectTask, columnKey, taskIndex, updateColumn } = this.props;
-        const task = columns[columnKey].tasks[taskIndex];
+        const { columns, selectTask, columnKey, taskKey, updateColumn } = this.props;
+
         return (
             <div className="taskModal" style={{ border: "1px solid red" }}>
                 <button onClick={() => selectTask(columnKey, null)}>X</button>
-                {this.state.isEdit ? <EditTaskForm
+                {/* implement inline edit */}
+                <EditTaskForm
                     columns={columns}
                     columnKey={columnKey}
-                    taskIndex={taskIndex}
+                    taskKey={taskKey}
                     updateColumn={updateColumn}
-                    toggleIsEdit={this.toggleIsEdit}
-                /> : <Task task={task}
-                    toggleIsEdit={this.toggleIsEdit}
-                    />}
-                <button onClick={() => this.deleteTask(columnKey, taskIndex)}>Delete Task</button>
-
+                />
+                <button onClick={() => this.deleteTask(taskKey)}>Delete Task</button>
             </div>
-
         )
     }
 }

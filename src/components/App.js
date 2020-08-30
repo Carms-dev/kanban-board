@@ -6,8 +6,8 @@ class App extends React.Component {
   state = {
     columns: {},
     isAddCol: false,
-    selectedColumn: null,
-    selectedTask: null
+    selectedColumnKey: null,
+    selectedTaskKey: null
   }
 
   // initialize basic columns
@@ -43,7 +43,7 @@ class App extends React.Component {
     const colName = ["Todo", "In progress", "Done"];
     const columns = {}
     colName.forEach((v, i) => {
-      columns[`column${i}`] = { name: v, tasks: [{ title: "xx" }] };
+      columns[`column${i}`] = { name: v, tasks: {} };
     })
 
     this.setState({ columns });
@@ -51,18 +51,19 @@ class App extends React.Component {
 
   //selectColumn
   selectColumn = (columnKey) => {
-    if (columnKey) {
-      const selectedColumn = this.state.columns[columnKey]
-      this.setState({ selectedColumn });
+    const column = this.state.columns[columnKey]
+    if (column) {
+      this.setState({ selectedColumnKey: columnKey });
     } else {
-      this.setState({ selectedColumn: null });
+      this.setState({ selectedColumnKey: null });
     }
   }
 
   // selectTask
-  selectTask = (columnKey, taskIndex) => {
-    const selectedTask = this.state.columns[columnKey].tasks[taskIndex];
-    selectedTask ? this.setState({ selectedTask }) : this.setState({ selectedTask: null })
+  selectTask = (columnKey, taskKey) => {
+    const task = this.state.columns[columnKey].tasks[taskKey];
+    const selectedTaskKey = task ? taskKey : null;
+    this.setState({ selectedTaskKey })
   }
 
   // Column CRUD
@@ -99,8 +100,8 @@ class App extends React.Component {
               key={key}
               columnKey={key}
               columns={this.state.columns}
-              selectedColumn={this.state.selectedColumn}
-              selectedTask={this.state.selectedTask}
+              selectedColumnKey={this.state.selectedColumnKey}
+              selectedTaskKey={this.state.selectedTaskKey}
               selectColumn={this.selectColumn}
               selectTask={this.selectTask}
               updateColumn={this.updateColumn}
@@ -112,7 +113,7 @@ class App extends React.Component {
             <AddColumnForm
               toggleAddCol={this.toggleAddCol}
               addColumn={this.addColumn}
-            /> : <button onClick={() => this.toggleAddCol()}>+ Add Another Column</button>
+            /> : <button onClick={this.toggleAddCol}>+ Add Another Column</button>
           }
         </div>
       </div>
