@@ -1,12 +1,13 @@
 import React from 'react';
 import Column from './Column';
 import AddColumnForm from './AddColumnForm';
-// import base from './base';
 
 class App extends React.Component {
   state = {
     columns: {},
-    isAddCol: false
+    isAddCol: false,
+    selectedColumn: null,
+    selectedTask: null
   }
 
   // initialize basic columns
@@ -15,12 +16,18 @@ class App extends React.Component {
     if (Object.keys(this.state.columns).length === 0) {
       this.initColumns();
     }
-    
+
     // retrive data from localStorage
     const localStorageRef = localStorage.getItem("kanban");
     if (localStorageRef) {
       this.setState({ columns: JSON.parse(localStorageRef) });
     }
+
+    // hook up to iconify
+    const script = document.createElement("script");
+    script.src = "https://code.iconify.design/1/1.0.7/iconify.min.js";
+    script.async = true;
+    document.body.appendChild(script);
   }
 
   componentDidUpdate() {
@@ -30,7 +37,7 @@ class App extends React.Component {
       JSON.stringify(this.state.columns)
     )
   }
-  
+
   // initialize board
   initColumns = () => {
     const colName = ["Todo", "In progress", "Done"];
@@ -40,6 +47,22 @@ class App extends React.Component {
     })
 
     this.setState({ columns });
+  }
+
+  //selectColumn
+  selectColumn = (columnKey) => {
+    if (columnKey) {
+      const selectedColumn = this.state.columns[columnKey]
+      this.setState({ selectedColumn });
+    } else {
+      this.setState({ selectedColumn: null });
+    }
+  }
+
+  // selectTask
+  selectTask = (columnKey, taskIndex) => {
+    const selectedTask = this.state.columns[columnKey].tasks[taskIndex];
+    selectedTask ? this.setState({ selectedTask }) : this.setState({ selectedTask: null })
   }
 
   // Column CRUD
@@ -60,7 +83,7 @@ class App extends React.Component {
     delete columns[key];
     this.setState({ columns });
   }
-  
+
   // update the isAddCol flag
   toggleAddCol = () => {
     this.setState({ isAddCol: !this.state.isAddCol });
@@ -68,23 +91,30 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="columns">
-        {Object.keys(this.state.columns).map(key => (
-          <Column 
-            key={key}
-            index={key}
-            column={this.state.columns[key]}
-            updateColumn={this.updateColumn}
-            deleteColumn={this.deleteColumn}
-          />
-        ))}
-        {(this.state.isAddCol) ? 
-          <AddColumnForm 
-            toggleAddCol={this.toggleAddCol}
-            addColumn={this.addColumn}
-          /> : 
-          <button onClick={() => this.toggleAddCol()}>+ Add Another Column</button>
-        }
+      <div>
+        <h1>Kanban Board</h1>
+        <div className="columns">
+          {Object.keys(this.state.columns).map(key => (
+            <Column
+              key={key}
+              columnKey={key}
+              columns={this.state.columns}
+              selectedColumn={this.state.selectedColumn}
+              selectedTask={this.state.selectedTask}
+              selectColumn={this.selectColumn}
+              selectTask={this.selectTask}
+              updateColumn={this.updateColumn}
+              deleteColumn={this.deleteColumn}
+            />
+          ))}
+
+          {(this.state.isAddCol) ?
+            <AddColumnForm
+              toggleAddCol={this.toggleAddCol}
+              addColumn={this.addColumn}
+            /> : <button onClick={() => this.toggleAddCol()}>+ Add Another Column</button>
+          }
+        </div>
       </div>
     )
   }

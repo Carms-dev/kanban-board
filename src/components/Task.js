@@ -1,10 +1,13 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 
-export class Task extends Component {
+class Task extends Component {
     render() {
+        const { task, toggleIsEdit } = this.props;
         return (
-            <div>
-                I'm a Task
+            <div className="task">
+                <h2>{task.title}</h2>
+                <p>{task.description}</p>
+                <button onClick={() => toggleIsEdit()}>Edit Task</button>
             </div>
         )
     }
