@@ -4,8 +4,8 @@ import './index.css';
 import App from './components/App';
 import * as serviceWorker from './serviceWorker';
 
-// css
-import './css/style.css';
+// scss
+import './scss/style.scss';
 
 ReactDOM.render(
   <React.StrictMode>
