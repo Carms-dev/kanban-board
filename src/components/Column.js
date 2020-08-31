@@ -71,6 +71,7 @@ export class Column extends Component {
             ) : (
               <button
                 className="add-btn"
+                style={{width: "100%"}}
                 onClick={() => {
                   selectColumn(columnKey);
                 }}

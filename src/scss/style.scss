@@ -79,6 +79,13 @@ button[type="submit"] {
     }
 }
 
+.columns > * {
+    min-width: 300px;
+    max-width: 300px;
+    border-radius: var(--br);
+    scroll-snap-align: center;
+}
+
 .add-column-form {
     width: 300px;
     padding-top: 0.5rem;
@@ -92,24 +99,19 @@ button[type="submit"] {
 .add-task-form {
     margin-top: 0.5rem;
 }
+
+
 .column-card {
     display: inline-block;
-    min-width: 300px;
-    max-width: 300px;
     height: fit-content;
-    border-radius: var(--br);
-    scroll-snap-align: center;
     background: var(--light);
     margin: 0.5rem;
-    padding: 0.5rem 1rem;
+    padding: 0.5rem;
 }
 
 .add-btn {
-    width: 100%;
     height: fit-content;
-    max-width: 300px;
-    margin: 0.5rem 0;
-
+    margin-top: 0.5rem;
     padding: 1rem;
     text-align: left;
     background: var(--light-grey);
