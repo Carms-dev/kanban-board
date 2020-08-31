@@ -2,8 +2,6 @@ import React from 'react';
 import Header from './Header'
 import Column from './Column';
 import AddColumnForm from './AddColumnForm';
-// import { DndProvider } from 'react-dnd'
-// import { HTML5Backend } from 'react-dnd-html5-backend'
 
 class App extends React.Component {
   state = {

@@ -16,18 +16,24 @@ export class Column extends Component {
         const dragOver = e => {
           e.preventDefault();
         };
+
         return (
+          <div className="column-card">
+            <div className="column-header">
+              <h2>{columns[columnKey].name}</h2>
+              <button
+                className="sq-btn"
+                onClick={() => deleteColumn(columnKey)}
+              >
+                🗑
+              </button>
+            </div>
             <div
+              className="tasks-container"
               id={columnKey}
               onDrop={drop}
               onDragOver={dragOver}
             >
-          <div className="column-card">
-            <div className="column-header">
-              <h2>{columns[columnKey].name}</h2>
-              <button className="sq-btn" onClick={() => deleteColumn(columnKey)}>🗑</button>
-            </div>
-
             {Object.keys(columns[columnKey].tasks).map((key) => {
               return (
                 <Task
@@ -42,6 +48,7 @@ export class Column extends Component {
                 />
               );
             })}
+            </div>
             {/* Add Task Button */}
             {selectedColumnKey === columnKey ? (
               <AddTaskForm

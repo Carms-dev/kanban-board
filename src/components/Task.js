@@ -18,21 +18,18 @@ class Task extends Component {
       }
 
       return (
-        <div>
-          <div
-            className="task"
-            id={taskKey}
-            draggable={this.props.draggable}
-            onDragStart={dragStart}
-            onDragOver={dragOver}
-          >
-          <div className="task-card">
-            {/* only title is rendered */}
-            <button onClick={() => selectTask(columnKey, taskKey)}>
-              <h3>{task.title}</h3>
-              <span className="icon-btn">🖋</span>
-            </button>
-          </div>
+        <div 
+          className="task-card"
+          id={taskKey}
+          draggable={this.props.draggable}
+          onDragStart={dragStart}
+          onDragOver={dragOver}
+        >
+          {/* only title is rendered */}
+          <button onClick={() => selectTask(columnKey, taskKey)}>
+            <h3>{task.title}</h3>
+            <span className="icon-btn">🖋</span>
+          </button>
           {/* render popup if that task is selected */}
           {selectedTaskKey === taskKey ? (
             <TaskModal
