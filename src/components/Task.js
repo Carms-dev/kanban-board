@@ -8,8 +8,7 @@ class Task extends Component {
       const task = columns[columnKey].tasks[taskKey]
       const dragStart = e => {
         const target = e.target;
-        console.log(target);
-        e.dataTransfer('task', target.id);
+        e.dataTransfer.setData('task-key', target.id);
         setTimeout(() => {
           target.display = 'none';
         }, 0)

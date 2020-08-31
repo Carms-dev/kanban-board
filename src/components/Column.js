@@ -8,7 +8,7 @@ export class Column extends Component {
         const { columns, columnKey, updateColumn, deleteColumn, selectColumn, selectedColumnKey, selectTask, selectedTaskKey } = this.props;
         const drop = e => {
           e.preventDefault();
-          const task = e.dataTransfer.getData('task');
+          const task = e.dataTransfer.getData('task-key');
           const card = document.getElementById(task);
           card.style.display = 'block';
           e.target.appendChild(card);
@@ -18,7 +18,7 @@ export class Column extends Component {
         };
         return (
             <div
-              id={this.id}
+              id={columnKey}
               onDrop={drop}
               onDragOver={dragOver}
             >
@@ -64,6 +64,7 @@ export class Column extends Component {
                   updateColumn={updateColumn}
                   selectTask={selectTask}
                   selectedTaskKey={selectedTaskKey}
+                  draggable="true"
                 />
               );
             })}
