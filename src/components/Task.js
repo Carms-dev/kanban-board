@@ -6,10 +6,27 @@ class Task extends Component {
   render() {
       const { columns, selectTask, selectedTaskKey, columnKey, taskKey, updateColumn } = this.props;
       const task = columns[columnKey].tasks[taskKey]
+      const dragStart = e => {
+        const target = e.target;
+        console.log(target);
+        e.dataTransfer('task', target.id);
+        setTimeout(() => {
+          target.display = 'none';
+        }, 0)
+      }
+      const dragOver = e => {
+        e.stopPropagation();
+      }
 
       return (
         <div>
-          <div className="task">
+          <div
+            className="task"
+            id={taskKey}
+            draggable={this.props.draggable}
+            onDragStart={dragStart}
+            onDragOver={dragOver}
+          >
             {/* only title is rendered */}
             <h3>{task.title}</h3>
             <button onClick={() => selectTask(columnKey, taskKey)}>

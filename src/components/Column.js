@@ -8,7 +8,7 @@ export class Column extends Component {
         const { columns, columnKey, updateColumn, deleteColumn, selectColumn, selectedColumnKey, selectTask, selectedTaskKey } = this.props;
         const drop = e => {
           e.preventDefault();
-          const task = e.dataTransfer.getData('task-card');
+          const task = e.dataTransfer.getData('task');
           const card = document.getElementById(task);
           card.style.display = 'block';
           e.target.appendChild(card);
