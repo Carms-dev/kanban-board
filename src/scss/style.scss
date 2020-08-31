@@ -3,6 +3,7 @@
     --light: #ebecf0;
     --dark-grey: #5e6c84;
     --light-grey: #DADBE2;
+    --yellow: #F1E05A;
     --br: 0.2rem;
 }
 * {
@@ -36,6 +37,24 @@ body {
     height: 100vh;
 }
 
+
+
+input[type="text"] {
+    width: 100%;
+    padding: 1rem;
+    margin-bottom: 0.5rem;
+    border: none;
+    border-radius: var(--br);
+    
+}
+
+button[type="submit"] {
+    background: var(--yellow);
+    padding: 0.75rem;
+    border-radius: var(--br);
+    color: var(--dark);
+    margin-right: 0.5rem;
+}
 // header
 .navbar {
     padding: 1rem;
@@ -61,49 +80,39 @@ body {
 }
 
 .columns > * {
-    display: inline-block;
     min-width: 300px;
-    height: fit-content;
+    max-width: 300px;
     border-radius: var(--br);
     scroll-snap-align: center;
 }
 
-// column-card
-.column-card {
+.add-column-form {
+    width: 300px;
+    padding-top: 0.5rem;
     background: var(--light);
+    height: min-content;
+    padding: 0.5rem;
     margin: 0.5rem;
-    padding: 0.5rem 1rem;
-}
-.column-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    cursor: pointer;
-    
-    h2 {
-        color: var(--dark);
-        padding: 0.5rem 0;
-    }
-    &:hover button {
-        display: grid;
-        place-content: center center;
-    }
-}
-.sq-btn {
-    background-color: var(--light-grey);
-    width: 2rem;
-    height: 2rem;
-    font-size: 1rem;
     border-radius: var(--br);
-    display: none;
 }
 
-// btn
+.add-task-form {
+    margin-top: 0.5rem;
+}
+
+
+.column-card {
+    display: inline-block;
+    height: fit-content;
+    background: var(--light);
+    margin: 0.5rem;
+    padding: 0.5rem;
+}
+
 .add-btn {
-    width: 100%;
-    max-width: 300px;
-    margin: 0.5rem 0;
-    padding: 0.75rem;
+    height: fit-content;
+    margin-top: 0.5rem;
+    padding: 1rem;
     text-align: left;
     background: var(--light-grey);
     color: var(--dark);
@@ -114,6 +123,39 @@ body {
     &:hover {
         opacity: 1;
     }
+}
+
+.column-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    
+    h2 {
+        color: var(--dark);
+        padding: 0.5rem 0;
+    }
+    &:hover .display-hover {
+        display: grid;
+        place-content: center center;
+    }
+}
+.sq-btn {
+    background-color: var(--light-grey);
+    margin-left: 1rem;
+    width: 2rem;
+    height: 2rem;
+    font-size: 1rem;
+    border-radius: var(--br);
+    
+    &:hover {
+        box-shadow: inset 0px 0px 5px #c1c1c1;
+        -webkit-box-shadow: inset 0px 0px 5px #c1c1c1;
+        -moz-box-shadow: inset 0px 0px 5px #c1c1c1;
+    }
+}
+.display-hover {
+    display: none;
 }
 
 // task card
@@ -128,7 +170,7 @@ body {
         padding: 0.5rem 0;
     }
 
-    button {
+    .task {
         width: 100%;
         display: flex;
         justify-content: space-between;
@@ -144,8 +186,38 @@ body {
     display: none;
     transition: 0.3s all ease;
 }
-.task-card > * {
+.task-card h3 {
     font-weight: 400;
 }
 
-// form
+// modal
+.modal-wrapper {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0,0,0,0.7);
+    display: grid;
+    place-content: center center;
+    z-index: 2;
+
+}
+
+.modal {
+    max-width: 90vw;
+    padding: 2rem;
+    background: var(--light);
+    border-radius: var(--br);
+    position: relative;
+    display: flex;
+    border: 5px solid var(--light-grey);
+
+    .modal-close {
+        position: absolute;
+        top: 0.5rem;
+        right: 0.5rem;
+    }
+    
+
+}

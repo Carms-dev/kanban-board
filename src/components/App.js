@@ -114,7 +114,12 @@ class App extends React.Component {
             <AddColumnForm
               toggleAddCol={this.toggleAddCol}
               addColumn={this.addColumn}
-            />) : <button className="add-btn" onClick={this.toggleAddCol}>+ Add Another Column</button>
+            />) : (
+            <button 
+              className="add-btn" 
+              onClick={this.toggleAddCol}
+              style={{marginLeft: "0.5rem"}}
+              >+ Add Another Column</button>)
           }
         </div>
       </div>

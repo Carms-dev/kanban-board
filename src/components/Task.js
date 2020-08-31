@@ -5,7 +5,8 @@ import TaskModal from './TaskModal';
 class Task extends Component {
   render() {
       const { columns, selectTask, selectedTaskKey, columnKey, taskKey, updateColumn } = this.props;
-      const task = columns[columnKey].tasks[taskKey]
+      const task = columns[columnKey].tasks[taskKey];
+
       const dragStart = e => {
         const target = e.target;
         e.dataTransfer.setData('tkey', target.dataset.tkey);
@@ -15,8 +16,32 @@ class Task extends Component {
         }, 0)
       }
       const dragOver = e => {
-        // e.stopPropagation();
+        e.preventDefault();
       }
+      const drop = e => {
+        e.preventDefault();
+        const tKeyDrag = e.dataTransfer.getData('tKey');
+        const cKeyDrag = e.dataTransfer.getData('cKey');
+        const tKeyDrop = e.currentTarget.dataset.tkey;
+        const cKeyDrop = e.currentTarget.dataset.ckey;
+
+        console.log(tKeyDrag, cKeyDrag, tKeyDrop, cKeyDrop)
+        console.log(e);
+
+        // if (cKeyPrev !== cKeyNext) {
+        //   // add task to next column
+        //   const columnNext = columns[cKeyNext];
+        //   const task = columns[cKeyPrev].tasks[tKey];
+        //   columnNext.tasks[tKey] = task;
+        //   updateColumn(cKeyNext, columnNext);
+        //   console.log(columnNext);
+
+        //   // delete task from prev column
+        //   const columnPrev = columns[cKeyPrev];
+        //   delete columnPrev.tasks[tKey];
+        //   updateColumn(cKeyPrev, columnPrev);
+        // }
+      };
 
       return (
         <div 
@@ -27,9 +52,11 @@ class Task extends Component {
           draggable={this.props.draggable}
           onDragStart={dragStart}
           onDragOver={dragOver}
+          onDrop={drop}
+          // onDragOver={dragOver}
         >
           {/* only title is rendered */}
-          <button onClick={() => selectTask(columnKey, taskKey)}>
+          <button className="task" onClick={() => selectTask(columnKey, taskKey)}>
             <h3>{task.title}</h3>
             <span className="icon-btn">🖋</span>
           </button>

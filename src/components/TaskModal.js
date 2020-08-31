@@ -10,20 +10,30 @@ class TaskModal extends Component {
         this.props.updateColumn(this.props.columnKey, column);
     }
 
+    // Close Modal if Enter or Esacpe key is pressed
+    handleKeyDown = (e) => {
+        if (e.keyCode === 13 || e.keyCode === 27) {
+            this.props.selectTask(this.props.columnKey, null);
+        }
+    }
+
     render() {
         const { columns, selectTask, columnKey, taskKey, updateColumn } = this.props;
 
         return (
-            <div className="taskModal" style={{ border: "1px solid red" }}>
-                <button onClick={() => selectTask(columnKey, null)}>X</button>
-                {/* implement inline edit */}
-                <EditTaskForm
-                    columns={columns}
-                    columnKey={columnKey}
-                    taskKey={taskKey}
-                    updateColumn={updateColumn}
-                />
-                <button onClick={() => this.deleteTask(taskKey)}>Delete Task</button>
+            <div className="modal-wrapper">
+                <div className="modal" onKeyDown={this.handleKeyDown}>
+                    <button className="modal-close" onClick={() => selectTask(columnKey, null)}>✖</button>
+                    {/* implement inline edit */}
+                    <EditTaskForm
+                        columns={columns}
+                        columnKey={columnKey}
+                        taskKey={taskKey}
+                        updateColumn={updateColumn}
+                        selectTask={selectTask}
+                    />
+                    <button className="sq-btn" onClick={() => this.deleteTask(taskKey)}>🗑</button>
+                </div>
             </div>
         )
     }
