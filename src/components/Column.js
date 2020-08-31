@@ -32,12 +32,12 @@ export class Column extends Component {
 
         return (
           <div 
-            className="column-card"
+            className="column-card">
+            <div className="column-header"
             id={columnKey}
             onDrop={drop}
             onDragOver={dragOver}
-          >
-            <div className="column-header">
+            >
               <h2>{columns[columnKey].name}</h2>
               <button
                 className="sq-btn"

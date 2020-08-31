@@ -22,7 +22,7 @@ class AddColumnForm extends React.Component {
     render() {
         return (
             <form className="column-add" onSubmit={this.createColumn} >
-                <input required ref={this.nameRef} type="text" name="name" placeholder="Enter title..." />
+                <input autoFocus required ref={this.nameRef} type="text" name="name" placeholder="Enter column name..." />
                 <button type="submit">Add Column</button>
                 <button onClick={this.props.toggleAddCol}>✖</button>
             </form>

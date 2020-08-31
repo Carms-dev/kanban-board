@@ -3,7 +3,7 @@ import React from "react";
 class AddTaskForm extends React.Component {
   // create reference needed for the form
   titleRef = React.createRef();
-  descriptionRef = React.createRef();
+  // descriptionRef = React.createRef();
 
   // Tasks#create: in response to submit
   createTask = (e) => {
@@ -12,7 +12,7 @@ class AddTaskForm extends React.Component {
     // create the task using the input value
     const task = {
       title: this.titleRef.current.value,
-      description: this.descriptionRef.current.value,
+      // description: this.descriptionRef.current.value,
     };
     // update the columns
     const updatedColumn = this.props.columns[this.props.columnKey];
@@ -28,22 +28,21 @@ class AddTaskForm extends React.Component {
     return (
       <form className="task-add" onSubmit={this.createTask}>
         <input
+          autoFocus
           required
           ref={this.titleRef}
           type="text"
           name="title"
-          placeholder="Enter title"
+          placeholder="Enter task title..."
         />
-        <input
+        {/* <input
           ref={this.descriptionRef}
           type="text"
           name="description"
           placeholder="Enter description"
-        />
+        /> */}
         <button type="submit">Add Task</button>
-        <button onClick={() => this.props.selectColumn(null)}>
-          Cancel
-        </button>
+        <button onClick={() => this.props.selectColumn(null)}>✖</button>
       </form>
     );
   }
