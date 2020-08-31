@@ -40,7 +40,7 @@ export class Column extends Component {
             >
               <h2>{columns[columnKey].name}</h2>
               <button
-                className="sq-btn"
+                className="sq-btn display-hover"
                 onClick={() => deleteColumn(columnKey)}
               >
                 🗑

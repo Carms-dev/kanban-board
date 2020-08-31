@@ -135,17 +135,20 @@ button[type="submit"] {
         color: var(--dark);
         padding: 0.5rem 0;
     }
-    &:hover button {
+    &:hover .display-hover {
         display: grid;
         place-content: center center;
     }
 }
 .sq-btn {
     background-color: var(--light-grey);
+    margin-left: 1rem;
     width: 2rem;
     height: 2rem;
     font-size: 1rem;
     border-radius: var(--br);
+}
+.display-hover {
     display: none;
 }
 
@@ -179,4 +182,33 @@ button[type="submit"] {
 }
 .task-card h3 {
     font-weight: 400;
+}
+
+// modal
+.modal-wrapper {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0,0,0,0.7);
+    display: grid;
+    place-content: center center;
+    z-index: 2;
+
+}
+
+.modal {
+    max-width: 90vw;
+    padding: 2rem;
+    background: var(--light);
+    border-radius: var(--br);
+    position: relative;
+    display: flex;
+
+    .modal-close {
+        position: absolute;
+        top: 0.5rem;
+        right: 0.5rem;
+    }
 }

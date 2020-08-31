@@ -24,8 +24,10 @@ class EditTaskForm extends React.Component {
         const task = columns[columnKey].tasks[taskKey];
 
         return (
-            <form className="task-add">
+            <form>
+                <h2 style={{marginBottom: "1rem"}}>Edit Task</h2>
                 <input
+                    autoFocus
                     type="text"
                     onChange={this.updateTask}
                     name="title"
