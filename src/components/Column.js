@@ -8,17 +8,35 @@ export class Column extends Component {
         const { columns, columnKey, updateColumn, deleteColumn, selectColumn, selectedColumnKey, selectTask, selectedTaskKey } = this.props;
         const drop = e => {
           e.preventDefault();
-          const task = e.dataTransfer.getData('task-key');
-          const card = document.getElementById(task);
-          card.style.display = 'block';
-          e.target.appendChild(card);
+          const tKey = e.dataTransfer.getData('tKey');
+          const cKeyPrev = e.dataTransfer.getData('cKey');
+          const cKeyNext = e.currentTarget.id;
+          
+          if (cKeyPrev !== cKeyNext) {
+            // add task to next column
+            const columnNext = columns[cKeyNext];
+            const task = columns[cKeyPrev].tasks[tKey];
+            columnNext.tasks[tKey] = task;
+            updateColumn(cKeyNext, columnNext);
+            console.log(columnNext);
+
+            // delete task from prev column
+            const columnPrev = columns[cKeyPrev];
+            delete columnPrev.tasks[tKey];
+            updateColumn(cKeyPrev, columnPrev);
+          } 
         };
         const dragOver = e => {
           e.preventDefault();
         };
 
         return (
-          <div className="column-card">
+          <div 
+            className="column-card"
+            id={columnKey}
+            onDrop={drop}
+            onDragOver={dragOver}
+          >
             <div className="column-header">
               <h2>{columns[columnKey].name}</h2>
               <button
@@ -28,12 +46,6 @@ export class Column extends Component {
                 🗑
               </button>
             </div>
-            <div
-              className="tasks-container"
-              id={columnKey}
-              onDrop={drop}
-              onDragOver={dragOver}
-            >
             {Object.keys(columns[columnKey].tasks).map((key) => {
               return (
                 <Task
@@ -48,7 +60,6 @@ export class Column extends Component {
                 />
               );
             })}
-            </div>
             {/* Add Task Button */}
             {selectedColumnKey === columnKey ? (
               <AddTaskForm
