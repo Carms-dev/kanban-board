@@ -10,6 +10,7 @@ class TaskModal extends Component {
         this.props.updateColumn(this.props.columnKey, column);
     }
 
+    // Close Modal if Enter or Esacpe key is pressed
     handleKeyDown = (e) => {
         if (e.keyCode === 13 || e.keyCode === 27) {
             this.props.selectTask(this.props.columnKey, null);

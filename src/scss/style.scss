@@ -147,6 +147,12 @@ button[type="submit"] {
     height: 2rem;
     font-size: 1rem;
     border-radius: var(--br);
+    
+    &:hover {
+        box-shadow: inset 0px 0px 5px #c1c1c1;
+        -webkit-box-shadow: inset 0px 0px 5px #c1c1c1;
+        -moz-box-shadow: inset 0px 0px 5px #c1c1c1;
+    }
 }
 .display-hover {
     display: none;
@@ -205,10 +211,13 @@ button[type="submit"] {
     border-radius: var(--br);
     position: relative;
     display: flex;
+    border: 5px solid var(--light-grey);
 
     .modal-close {
         position: absolute;
         top: 0.5rem;
         right: 0.5rem;
     }
+    
+
 }
