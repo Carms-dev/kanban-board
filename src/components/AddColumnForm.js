@@ -9,7 +9,7 @@ class AddColumnForm extends React.Component {
         // create new column
         const column = {
             name: this.nameRef.current.value,
-            tasks: []
+            tasks: {}
         }
         // add the column
         this.props.addColumn(column);

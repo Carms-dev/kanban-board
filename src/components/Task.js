@@ -8,31 +8,31 @@ class Task extends Component {
       const task = columns[columnKey].tasks[taskKey]
       const dragStart = e => {
         const target = e.target;
-        e.dataTransfer.setData('task-key', target.id);
+        e.dataTransfer.setData('tkey', target.dataset.tkey);
+        e.dataTransfer.setData('ckey', target.dataset.ckey);
         setTimeout(() => {
           target.display = 'none';
         }, 0)
       }
       const dragOver = e => {
-        e.stopPropagation();
+        // e.stopPropagation();
       }
 
       return (
-        <div>
-          <div
-            className="task"
-            id={taskKey}
-            draggable={this.props.draggable}
-            onDragStart={dragStart}
-            onDragOver={dragOver}
-          >
-          <div className="task-card">
-            {/* only title is rendered */}
-            <button onClick={() => selectTask(columnKey, taskKey)}>
-              <h3>{task.title}</h3>
-              <span className="icon-btn">🖋</span>
-            </button>
-          </div>
+        <div 
+          className="task-card"
+          id={taskKey}
+          data-tkey={taskKey}
+          data-ckey={columnKey}
+          draggable={this.props.draggable}
+          onDragStart={dragStart}
+          onDragOver={dragOver}
+        >
+          {/* only title is rendered */}
+          <button onClick={() => selectTask(columnKey, taskKey)}>
+            <h3>{task.title}</h3>
+            <span className="icon-btn">🖋</span>
+          </button>
           {/* render popup if that task is selected */}
           {selectedTaskKey === taskKey ? (
             <TaskModal

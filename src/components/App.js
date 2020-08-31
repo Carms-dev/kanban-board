@@ -2,8 +2,6 @@ import React from 'react';
 import Header from './Header'
 import Column from './Column';
 import AddColumnForm from './AddColumnForm';
-// import { DndProvider } from 'react-dnd'
-// import { HTML5Backend } from 'react-dnd-html5-backend'
 
 class App extends React.Component {
   state = {
@@ -76,15 +74,15 @@ class App extends React.Component {
     this.setState({ columns });
   }
 
-  updateColumn = (key, updatedColumn) => {
+  updateColumn = (columnKey, updatedColumn) => {
     const columns = { ...this.state.columns };
-    columns[key] = updatedColumn;
+    columns[columnKey] = updatedColumn;
     this.setState({ columns });
   }
 
-  deleteColumn = (key) => {
+  deleteColumn = (columnKey) => {
     const columns = { ...this.state.columns };
-    delete columns[key];
+    delete columns[columnKey];
     this.setState({ columns });
   }
 
@@ -112,11 +110,11 @@ class App extends React.Component {
             />
           ))}
 
-          {(this.state.isAddCol) ?
+          {(this.state.isAddCol) ? (
             <AddColumnForm
               toggleAddCol={this.toggleAddCol}
               addColumn={this.addColumn}
-            /> : <button className="add-btn" onClick={this.toggleAddCol}>+ Add Another Column</button>
+            />) : <button className="add-btn" onClick={this.toggleAddCol}>+ Add Another Column</button>
           }
         </div>
       </div>
