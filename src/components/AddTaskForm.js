@@ -26,7 +26,7 @@ class AddTaskForm extends React.Component {
 
   render() {
     return (
-      <form className="task-add" onSubmit={this.createTask}>
+      <form className="add-task-form" onSubmit={this.createTask}>
         <input
           autoFocus
           required

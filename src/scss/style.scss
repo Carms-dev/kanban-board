@@ -37,9 +37,7 @@ body {
     height: 100vh;
 }
 
-form {
-    padding-top: 0.5rem;
-}
+
 
 input[type="text"] {
     width: 100%;
@@ -81,9 +79,23 @@ button[type="submit"] {
     }
 }
 
-.columns > * {
+.add-column-form {
+    width: 300px;
+    padding-top: 0.5rem;
+    background: var(--light);
+    height: min-content;
+    padding: 0.5rem;
+    margin: 0.5rem;
+    border-radius: var(--br);
+}
+
+.add-task-form {
+    margin-top: 0.5rem;
+}
+.column-card {
     display: inline-block;
     min-width: 300px;
+    max-width: 300px;
     height: fit-content;
     border-radius: var(--br);
     scroll-snap-align: center;
@@ -92,9 +104,25 @@ button[type="submit"] {
     padding: 0.5rem 1rem;
 }
 
-// column-card
-.column-card {
+.add-btn {
+    width: 100%;
+    height: fit-content;
+    max-width: 300px;
+    margin: 0.5rem 0;
+
+    padding: 1rem;
+    text-align: left;
+    background: var(--light-grey);
+    color: var(--dark);
+    border-radius: var(--br);
+    transition: all 0.3s;
+    opacity: 0.6;
+    
+    &:hover {
+        opacity: 1;
+    }
 }
+
 .column-header {
     display: flex;
     justify-content: space-between;
@@ -117,24 +145,6 @@ button[type="submit"] {
     font-size: 1rem;
     border-radius: var(--br);
     display: none;
-}
-
-// btn
-.add-btn {
-    width: 100%;
-    max-width: 300px;
-    margin: 0.5rem 0;
-    padding: 1rem;
-    text-align: left;
-    background: var(--light-grey);
-    color: var(--dark);
-    border-radius: var(--br);
-    transition: all 0.3s;
-    opacity: 0.6;
-    
-    &:hover {
-        opacity: 1;
-    }
 }
 
 // task card
@@ -167,9 +177,4 @@ button[type="submit"] {
 }
 .task-card h3 {
     font-weight: 400;
-}
-
-// form
-.column-add {
-    width: 300px;
 }
