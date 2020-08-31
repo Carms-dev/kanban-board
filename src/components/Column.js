@@ -6,7 +6,22 @@ import AddTaskForm from './AddTaskForm';
 export class Column extends Component {
     render() {
         const { columns, columnKey, updateColumn, deleteColumn, selectColumn, selectedColumnKey, selectTask, selectedTaskKey } = this.props;
+        const drop = e => {
+          e.preventDefault();
+          const task = e.dataTransfer.getData('task-key');
+          const card = document.getElementById(task);
+          card.style.display = 'block';
+          e.target.appendChild(card);
+        };
+        const dragOver = e => {
+          e.preventDefault();
+        };
         return (
+            <div
+              id={columnKey}
+              onDrop={drop}
+              onDragOver={dragOver}
+            >
           <div className="column-card">
             <div className="column-header">
               <h2>{columns[columnKey].name}</h2>
@@ -23,6 +38,7 @@ export class Column extends Component {
                   updateColumn={updateColumn}
                   selectTask={selectTask}
                   selectedTaskKey={selectedTaskKey}
+                  draggable="true"
                 />
               );
             })}
