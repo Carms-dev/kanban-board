@@ -26,13 +26,14 @@ class Task extends Component {
             onDragStart={dragStart}
             onDragOver={dragOver}
           >
+          <div className="task-card">
             {/* only title is rendered */}
-            <h3>{task.title}</h3>
             <button onClick={() => selectTask(columnKey, taskKey)}>
-              See Details
+              <h3>{task.title}</h3>
+              <span className="icon-btn">🖋</span>
             </button>
           </div>
-            {/* render popup if that task is selected */}
+          {/* render popup if that task is selected */}
           {selectedTaskKey === taskKey ? (
             <TaskModal
               columns={columns}

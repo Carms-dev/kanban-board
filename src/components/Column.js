@@ -22,39 +22,13 @@ export class Column extends Component {
               onDrop={drop}
               onDragOver={dragOver}
             >
+          <div className="column-card">
             <div className="column-header">
               <h2>{columns[columnKey].name}</h2>
-              {selectedColumnKey === columnKey ? (
-                <AddTaskForm
-                  columns={columns}
-                  columnKey={columnKey}
-                  updateColumns={updateColumn}
-                  selectColumn={selectColumn}
-                />
-              ) : (
-                <button
-                  onClick={() => {
-                    selectColumn(columnKey);
-                  }}
-                >
-                  + Task
-                </button>
-              )}
-
-              <button
-                onClick={() => {
-                  deleteColumn(columnKey);
-                }}
-              >
-                <span
-                  className="iconify"
-                  data-icon="clarity:trash-line"
-                  data-inline="false"
-                ></span>{" "}
-                column
-              </button>
+              <button className="sq-btn" onClick={() => deleteColumn(columnKey)}>🗑</button>
             </div>
-            {Object.keys(columns[columnKey].tasks).map(key => {
+
+            {Object.keys(columns[columnKey].tasks).map((key) => {
               return (
                 <Task
                   key={key}
@@ -68,6 +42,24 @@ export class Column extends Component {
                 />
               );
             })}
+            {/* Add Task Button */}
+            {selectedColumnKey === columnKey ? (
+              <AddTaskForm
+                columns={columns}
+                columnKey={columnKey}
+                updateColumns={updateColumn}
+                selectColumn={selectColumn}
+              />
+            ) : (
+              <button
+                className="add-btn"
+                onClick={() => {
+                  selectColumn(columnKey);
+                }}
+              >
+                + Add a Task
+              </button>
+            )}
           </div>
         );
     }
