@@ -35,8 +35,8 @@ export class Column extends Component {
             className="column-card">
             <div className="column-header"
             id={columnKey}
-            onDrop={drop}
             onDragOver={dragOver}
+            onDrop={drop}
             >
               <h2>{columns[columnKey].name}</h2>
               <button

@@ -11,15 +11,13 @@ class Task extends Component {
         const target = e.target;
         e.dataTransfer.setData('tkey', target.dataset.tkey);
         e.dataTransfer.setData('ckey', target.dataset.ckey);
-        // setTimeout(() => {
-        //   target.display = 'none';
-        // }, 0)
       }
       const dragOver = e => {
         e.preventDefault();
       }
       const drop = e => {
         e.preventDefault();
+
         const tKeyDrag = e.dataTransfer.getData('tKey');
         const cKeyDrag = e.dataTransfer.getData('cKey');
         const tKeyDrop = e.currentTarget.dataset.tkey;
@@ -32,21 +30,22 @@ class Task extends Component {
 
         // Extract the tasks keys to an Array
         const tasksKeys = Object.keys(columns[cKeyDrop].tasks);
+        
+        // split array based on where the mouse is when drop
         const dropBefore = (y / h) < 0.5;
 
-        // find where to split the array
         const spliceIndex = dropBefore 
           ? tasksKeys.indexOf(tKeyDrop)
           : tasksKeys.indexOf(tKeyDrop) + 1;
 
-        // split keys into two
+        // split array of keys into two
         const tasksKeysBef = tasksKeys.splice(0, spliceIndex);
 
         // set new containers
         const updatedColumn = columns[cKeyDrop];
         const updatedTasks = {};
         
-        // rebuilt the array with the keys
+        // rebuilt the tasks object
         // before
         tasksKeysBef.forEach(key => {
           updatedTasks[key] = updatedColumn.tasks[key]
@@ -73,7 +72,6 @@ class Task extends Component {
       return (
         <div 
           className="task-card"
-          id={taskKey}
           data-tkey={taskKey}
           data-ckey={columnKey}
           draggable={this.props.draggable}

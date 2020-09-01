@@ -30,7 +30,6 @@ class TaskModal extends Component {
                         columnKey={columnKey}
                         taskKey={taskKey}
                         updateColumn={updateColumn}
-                        selectTask={selectTask}
                     />
                     <button className="sq-btn" onClick={() => this.deleteTask(taskKey)}>🗑</button>
                 </div>
