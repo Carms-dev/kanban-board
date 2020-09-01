@@ -11,49 +11,73 @@ class Task extends Component {
         const target = e.target;
         e.dataTransfer.setData('tkey', target.dataset.tkey);
         e.dataTransfer.setData('ckey', target.dataset.ckey);
-        setTimeout(() => {
-          target.display = 'none';
-        }, 0)
       }
       const dragOver = e => {
         e.preventDefault();
       }
       const drop = e => {
         e.preventDefault();
+
         const tKeyDrag = e.dataTransfer.getData('tKey');
         const cKeyDrag = e.dataTransfer.getData('cKey');
         const tKeyDrop = e.currentTarget.dataset.tkey;
         const cKeyDrop = e.currentTarget.dataset.ckey;
 
-        console.log(tKeyDrag, cKeyDrag, tKeyDrop, cKeyDrop)
-        console.log(e);
+        // find mouse position of drop
+        const rect = e.currentTarget.getBoundingClientRect();
+        const y = e.clientY - rect.top;
+        const h = rect.height;
 
-        // if (cKeyPrev !== cKeyNext) {
-        //   // add task to next column
-        //   const columnNext = columns[cKeyNext];
-        //   const task = columns[cKeyPrev].tasks[tKey];
-        //   columnNext.tasks[tKey] = task;
-        //   updateColumn(cKeyNext, columnNext);
-        //   console.log(columnNext);
+        // Extract the tasks keys to an Array
+        const tasksKeys = Object.keys(columns[cKeyDrop].tasks);
+        
+        // split array based on where the mouse is when drop
+        const dropBefore = (y / h) < 0.5;
 
-        //   // delete task from prev column
-        //   const columnPrev = columns[cKeyPrev];
-        //   delete columnPrev.tasks[tKey];
-        //   updateColumn(cKeyPrev, columnPrev);
-        // }
+        const spliceIndex = dropBefore 
+          ? tasksKeys.indexOf(tKeyDrop)
+          : tasksKeys.indexOf(tKeyDrop) + 1;
+
+        // split array of keys into two
+        const tasksKeysBef = tasksKeys.splice(0, spliceIndex);
+
+        // set new containers
+        const updatedColumn = columns[cKeyDrop];
+        const updatedTasks = {};
+        
+        // rebuilt the tasks object
+        // before
+        tasksKeysBef.forEach(key => {
+          updatedTasks[key] = updatedColumn.tasks[key]
+        })
+        // insert
+        updatedTasks[tKeyDrag] = columns[cKeyDrag].tasks[tKeyDrag];
+        // after
+        tasksKeys.forEach((key) => {
+          updatedTasks[key] = updatedColumn.tasks[key];
+        });
+
+        // update the variable and update the column
+        updatedColumn.tasks = updatedTasks;
+        updateColumn(cKeyDrop, updatedColumn);
+
+        // delete task from prev column
+        if (cKeyDrag !== cKeyDrop) {
+          const columnPrev = columns[cKeyDrag];
+          delete columnPrev.tasks[tKeyDrag];
+          updateColumn(cKeyDrag, columnPrev);
+        }
       };
 
       return (
         <div 
           className="task-card"
-          id={taskKey}
           data-tkey={taskKey}
           data-ckey={columnKey}
           draggable={this.props.draggable}
           onDragStart={dragStart}
           onDragOver={dragOver}
           onDrop={drop}
-          // onDragOver={dragOver}
         >
           {/* only title is rendered */}
           <button className="task" onClick={() => selectTask(columnKey, taskKey)}>

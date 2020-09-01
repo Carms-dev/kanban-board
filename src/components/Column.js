@@ -10,7 +10,7 @@ export class Column extends Component {
           e.preventDefault();
           const tKey = e.dataTransfer.getData('tKey');
           const cKeyPrev = e.dataTransfer.getData('cKey');
-          const cKeyNext = e.currentTarget.id;
+          const cKeyNext = e.currentTarget.dataset.ckey;
           
           if (cKeyPrev !== cKeyNext) {
             // add task to next column
@@ -31,12 +31,12 @@ export class Column extends Component {
         };
 
         return (
-          <div 
-            className="column-card">
-            <div className="column-header"
-            id={columnKey}
-            onDrop={drop}
-            onDragOver={dragOver}
+          <div className="column-card">
+            <div
+              className="column-header"
+              data-ckey={columnKey}
+              onDragOver={dragOver}
+              onDrop={drop}
             >
               <h2>{columns[columnKey].name}</h2>
               <button
@@ -71,7 +71,7 @@ export class Column extends Component {
             ) : (
               <button
                 className="add-btn"
-                style={{width: "100%"}}
+                style={{ width: "100%" }}
                 onClick={() => {
                   selectColumn(columnKey);
                 }}

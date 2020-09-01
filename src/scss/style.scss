@@ -6,6 +6,7 @@
     --yellow: #F1E05A;
     --br: 0.2rem;
 }
+
 * {
     box-sizing: border-box;
 }
@@ -21,13 +22,14 @@ p {
     padding: 0;
     margin: 0;
 }
+
 button {
     cursor: pointer;
     background-color: transparent;
     border: none;
-}
-button:focus {
-    outline:0;
+    &:focus {
+        outline: 0;
+    }
 }
 
 body {
@@ -37,15 +39,12 @@ body {
     height: 100vh;
 }
 
-
-
 input[type="text"] {
     width: 100%;
     padding: 1rem;
     margin-bottom: 0.5rem;
     border: none;
     border-radius: var(--br);
-    
 }
 
 button[type="submit"] {
@@ -55,6 +54,7 @@ button[type="submit"] {
     color: var(--dark);
     margin-right: 0.5rem;
 }
+
 // header
 .navbar {
     padding: 1rem;
@@ -100,7 +100,6 @@ button[type="submit"] {
     margin-top: 0.5rem;
 }
 
-
 .column-card {
     display: inline-block;
     height: fit-content;
@@ -140,6 +139,7 @@ button[type="submit"] {
         place-content: center center;
     }
 }
+
 .sq-btn {
     background-color: var(--light-grey);
     margin-left: 1rem;
@@ -154,6 +154,7 @@ button[type="submit"] {
         -moz-box-shadow: inset 0px 0px 5px #c1c1c1;
     }
 }
+
 .display-hover {
     display: none;
 }
@@ -186,6 +187,7 @@ button[type="submit"] {
     display: none;
     transition: 0.3s all ease;
 }
+
 .task-card h3 {
     font-weight: 400;
 }
@@ -201,7 +203,6 @@ button[type="submit"] {
     display: grid;
     place-content: center center;
     z-index: 2;
-
 }
 
 .modal {
@@ -218,6 +219,4 @@ button[type="submit"] {
         top: 0.5rem;
         right: 0.5rem;
     }
-    
-
 }
